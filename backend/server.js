@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const zodiacRoutes = require('./routes/zodiacRoutes');
 const aiRoutes = require('./routes/aiRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
 const connectDatabase = require('./config/db');
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(async (req, res, next) => {
 // Routes
 app.use('/api/zodiac', zodiacRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/appointment', appointmentRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

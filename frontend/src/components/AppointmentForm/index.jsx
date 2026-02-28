@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import { getApiUrl } from "../../config/api";
 
 const STEPS = ['Identity', 'Birth Details', 'Session'];
 
@@ -33,6 +35,8 @@ const LineInput = ({ ...props }) => (
 const AppointmentForm = () => {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [data, setData] = useState({
     name: '', email: '', phone: '', gender: '',
     birthDate: '', birthTime: '', birthPlace: '',
@@ -49,8 +53,17 @@ const AppointmentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await new Promise(r => setTimeout(r, 1500));
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+    try {
+      await axios.post(getApiUrl('/appointment'), data);
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Appointment error:', err);
+      setError(err.response?.data?.error || 'Failed to book appointment. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -86,10 +99,10 @@ const AppointmentForm = () => {
                   key={i}
                   onClick={() => i < step && setStep(i)}
                   className={`magnetic px-6 py-4 text-[10px] font-bold tracking-[0.25em] uppercase border-b-2 -mb-[2px] transition-all duration-500 ${step === i
-                      ? 'border-[#E5C07B] text-[#E5C07B]'
-                      : i < step
-                        ? 'border-white/30 text-gray-400 cursor-pointer hover:text-white hover:border-white/60'
-                        : 'border-transparent text-gray-700 cursor-not-allowed'
+                    ? 'border-[#E5C07B] text-[#E5C07B]'
+                    : i < step
+                      ? 'border-white/30 text-gray-400 cursor-pointer hover:text-white hover:border-white/60'
+                      : 'border-transparent text-gray-700 cursor-not-allowed'
                     }`}
                 >
                   {String(i + 1).padStart(2, '0')} {s}
@@ -202,6 +215,13 @@ const AppointmentForm = () => {
 
               </AnimatePresence>
 
+              {/* Error Message */}
+              {error && (
+                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-6 p-4 border border-red-500/30 bg-red-500/5 rounded-lg">
+                  <p className="text-red-400 text-sm font-light">{error}</p>
+                </motion.div>
+              )}
+
               {/* Navigation */}
               <div className="flex items-center justify-between mt-16 pt-8 border-t border-white/[0.05]">
                 {step > 0 ? (
@@ -219,15 +239,22 @@ const AppointmentForm = () => {
                     <div className="w-8 h-[1px] bg-current group-hover:w-14 transition-all duration-500" />
                   </button>
                 ) : (
-                  <button type="submit"
-                    className="magnetic group flex items-center gap-6">
+                  <button type="submit" disabled={loading}
+                    className="magnetic group flex items-center gap-6 disabled:opacity-50">
                     <div className="w-16 h-16 rounded-full border border-white/30 group-hover:border-[#E5C07B] group-hover:bg-[#E5C07B] flex items-center justify-center transition-all duration-700">
-                      <svg className="w-6 h-6 group-hover:text-black transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
+                      {loading ? (
+                        <svg className="w-6 h-6 animate-spin text-white group-hover:text-black" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-6 h-6 group-hover:text-black transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      )}
                     </div>
                     <span className="text-sm font-bold tracking-[0.2em] uppercase text-white group-hover:text-[#E5C07B] transition-colors duration-300">
-                      Confirm Booking
+                      {loading ? 'Sending...' : 'Confirm Booking'}
                     </span>
                   </button>
                 )}

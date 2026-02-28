@@ -56,7 +56,7 @@ const AppointmentForm = () => {
     setLoading(true);
     setError('');
     try {
-      await axios.post(getApiUrl('/appointment'), data);
+      await axios.post(getApiUrl('/api/appointment'), data);
       setSubmitted(true);
     } catch (err) {
       console.error('Appointment error:', err);

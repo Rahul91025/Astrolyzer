@@ -139,7 +139,65 @@ const chatAstrologer = async (req, res) => {
   }
 };
 
+const getDailyHoroscope = async (req, res) => {
+  try {
+    const { sign } = req.body;
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+      return res.status(500).json({ error: "API key is not configured" });
+    }
+
+    if (!sign) {
+      return res.status(400).json({ error: "Zodiac sign is required" });
+    }
+
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    const prompt = `
+You are a mystical, highly intuitive master astrologer. 
+Generate a short, empowering, and beautifully written daily horoscope (in English) for the zodiac sign: ${sign}.
+
+Guidelines:
+1. Tone must be premium, cosmic, mysterious, yet highly uplifting and actionable.
+2. Only provide the reading, no intro or outro like "Here is your reading".
+3. Structure it in one strong paragraph (3-4 sentences max).
+4. Focus on today's planetary energy for ${sign}, touching lightly on career, love, or personal growth.
+`;
+
+    const requestBody = {
+      contents: [{ parts: [{ text: prompt }] }],
+    };
+
+    const response = await axios.post(apiUrl, requestBody, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const horoscope = response.data?.candidates?.[0]?.content?.parts?.[0]?.text || 'The stars are silent right now, but your path remains bright.';
+
+    try {
+      await Data.create({
+        type: 'daily_horoscope',
+        request: { sign },
+        response: { horoscope },
+        meta: {
+          source: 'api',
+          endpoint: '/api/ai/horoscope',
+        },
+      });
+    } catch (dbError) {
+      console.error('Failed to store horoscope lookup:', dbError.message);
+    }
+
+    res.json({ horoscope });
+  } catch (error) {
+    console.error('Gemini Horoscope error:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to read the stars. Please try again.' });
+  }
+};
+
 module.exports = {
   analyzePalm,
-  chatAstrologer
+  chatAstrologer,
+  getDailyHoroscope
 };

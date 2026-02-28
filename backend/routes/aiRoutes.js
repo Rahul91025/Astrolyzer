@@ -6,9 +6,10 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-const { analyzePalm, chatAstrologer } = require('../controllers/aiController');
+const { analyzePalm, chatAstrologer, getDailyHoroscope } = require('../controllers/aiController');
 
 router.post('/analyze', upload.single('image'), analyzePalm);
 router.post('/chat', chatAstrologer);
+router.post('/horoscope', getDailyHoroscope);
 
 module.exports = router;

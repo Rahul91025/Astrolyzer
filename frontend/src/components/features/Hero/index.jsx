@@ -4,7 +4,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaMicrophone, FaStop } from "react-icons/fa";
 import SplitType from 'split-type';
-import { getApiUrl } from "../../config/api";
+import { aiService } from "../../../api";
+import { useApi } from "../../../hooks/useApi";
+import heroBg from "../../../assets/cosmic/hero-nebula.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,11 +22,12 @@ const AstroHero = () => {
   const textRef = useRef(null);
 
   const [isListening, setIsListening] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [aiResponse, setAiResponse] = useState("");
   const [error, setError] = useState("");
   const recognitionRef = useRef(null);
+
+  const { loading: isProcessing, execute: getChatReply } = useApi(aiService.getChatResponse);
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
@@ -113,18 +116,8 @@ const AstroHero = () => {
   // --- AI Voice Logic ---
   const queryGeminiAI = async (userInput) => {
     try {
-      setIsProcessing(true);
       setError("");
-
-      const response = await fetch(getApiUrl('/api/ai/chat'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userInput })
-      });
-
-      if (!response.ok) throw new Error("Astrology API unavailable");
-
-      const data = await response.json();
+      const data = await getChatReply(userInput);
       const aiText = data.reply;
 
       setAiResponse(aiText);
@@ -134,8 +127,6 @@ const AstroHero = () => {
       setAiResponse(FALLBACK_MESSAGE);
       setError("Unable to get response from server.");
       speakMysticalVoice(FALLBACK_MESSAGE);
-    } finally {
-      setIsProcessing(false);
     }
   };
 
@@ -237,7 +228,20 @@ const AstroHero = () => {
       ref={container}
       className="relative min-h-screen w-full bg-[#050505] overflow-hidden flex flex-col items-center justify-center pt-32 pb-20"
     >
-      {/* Massive Abstract Orbs - GPU composited */}
+      {/* Premium Cinematic Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <motion.img
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.6 }}
+          transition={{ duration: 2.5, ease: "easeOut" }}
+          src={heroBg}
+          alt="Cosmic Background"
+          className="w-full h-full object-cover filter brightness-[0.7] contrast-[1.1]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]" />
+      </div>
+
+      {/* Subtle Abstract Orbs for depth */}
       <div
         ref={orb1Ref}
         className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-900 rounded-full mix-blend-screen opacity-30 z-0 pointer-events-none"

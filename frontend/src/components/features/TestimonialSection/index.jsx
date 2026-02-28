@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import constellationBg from "../../../assets/cosmic/constellation-bg.png";
 
 const TESTIMONIALS = [
   {
@@ -45,6 +46,11 @@ const TestimonialSection = () => {
 
   return (
     <section className="bg-[#050505] relative overflow-hidden py-28 px-6 md:px-12 lg:px-20">
+
+      {/* Premium Constellation Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
+        <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+      </div>
 
       {/* Background text */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[25vw] font-display font-black text-white opacity-[0.012] leading-none pointer-events-none select-none uppercase whitespace-nowrap">VOICES</div>

@@ -1,8 +1,8 @@
 import React from 'react';
-import CheckoutPage from '../../components/CheckoutPage';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import Planet from '../../components/Planet';
+import CheckoutPage from '../../components/features/CheckoutPage';
+import Navbar from '../../components/layout/Navbar';
+import Footer from '../../components/layout/Footer';
+import Planet from '../../components/features/Planet';
 
 const Billing = () => {
     return (
@@ -10,7 +10,7 @@ const Billing = () => {
             <Navbar />
             <Planet title="Billing" />
             <CheckoutPage />
-            <Footer/>
+            <Footer />
         </>
     )
 }

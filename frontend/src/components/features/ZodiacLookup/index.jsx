@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
+import zodiacBg from "../../../assets/cosmic/zodiac-bg.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,6 +67,11 @@ const ZodiacLookup = () => {
 
   return (
     <section ref={containerRef} className="bg-[#050505] py-32 px-6 md:px-12 relative overflow-hidden min-h-screen flex flex-col xl:flex-row items-center justify-center gap-12">
+
+      {/* Premium Section Background */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <img src={zodiacBg} alt="" className="w-full h-full object-cover mix-blend-overlay" />
+      </div>
 
       {/* Massive Rotated Title area */}
       <div className="xl:w-1/4 flex flex-col justify-center items-start xl:items-end w-full relative z-10">

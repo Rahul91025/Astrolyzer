@@ -2,6 +2,8 @@ import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import birthChartImg from '../../assets/cosmic/birth-chart-featured.png';
+import constellationBg from '../../assets/cosmic/constellation-bg.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -289,6 +291,22 @@ const Shop = () => {
                         </motion.div>
                     </AnimatePresence>
 
+                    {/* Featured Product Image (for Celestial Birth Chart) */}
+                    <AnimatePresence mode="wait">
+                        {activeProduct.id === 1 && (
+                            <motion.div
+                                key="birth-chart-img"
+                                initial={{ opacity: 0, scale: 1.1 }}
+                                animate={{ opacity: 0.25, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.8, ease: 'easeOut' }}
+                                className="absolute inset-0 pointer-events-none z-[1]"
+                            >
+                                <img src={birthChartImg} alt="" className="w-full h-full object-cover mix-blend-lighten filter brightness-[0.6]" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
                     {/* Foreground info */}
                     <div className="relative z-10 flex flex-col items-start px-12 xl:px-20 w-full">
                         <AnimatePresence mode="wait">
@@ -459,6 +477,11 @@ const Shop = () => {
 
             {/* ── Section 3: EDITORIAL PRODUCT GRID ──────────────────────────────────── */}
             <section ref={gridRef} className="relative z-10 px-6 md:px-12 lg:px-16 xl:px-20 py-24">
+
+                {/* Constellation Background */}
+                <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
+                    <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+                </div>
 
                 {/* Section header */}
                 <div className="mb-16 flex flex-col xl:flex-row xl:items-end xl:justify-between gap-8">

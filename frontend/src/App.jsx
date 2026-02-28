@@ -2,17 +2,16 @@ import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'sonner';
-import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import ErrorBoundary from './components/ErrorBoundary';
-import LoadingScreen from './components/LoadingScreen';
-import CustomCursor from './components/CustomCursor';
-import NoiseOverlay from './components/NoiseOverlay';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import ErrorBoundary from './components/layout/ErrorBoundary';
+import LoadingScreen from './components/layout/LoadingScreen';
+import CustomCursor from './components/layout/CustomCursor';
+import NoiseOverlay from './components/layout/NoiseOverlay';
 
 gsap.registerPlugin(ScrollTrigger);
 

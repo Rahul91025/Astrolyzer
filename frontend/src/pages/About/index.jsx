@@ -1,6 +1,6 @@
 import React from 'react';
-import AboutAstrology from '../../components/AboutAstrology';
-import TestimonialSection from '../../components/TestimonialSection';
+import AboutAstrology from '../../components/features/AboutAstrology';
+import TestimonialSection from '../../components/features/TestimonialSection';
 
 const About = () => (
     <>

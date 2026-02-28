@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from '../../components/Navbar';
-import FAQAccordion from '../../components/FAQAccordion';
-import Planet from '../../components/Planet';
-import Footer from '../../components/Footer';
+import Navbar from '../../components/layout/Navbar';
+import FAQAccordion from '../../components/features/FAQAccordion';
+import Planet from '../../components/features/Planet';
+import Footer from '../../components/layout/Footer';
 
 const Page = () => {
     return (
@@ -10,9 +10,9 @@ const Page = () => {
             <Navbar />
             <Planet title="FAQs" />
             <FAQAccordion />
-            <Footer/>
-            
-            
+            <Footer />
+
+
         </>
     )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import constellationBg from "../../../assets/cosmic/constellation-bg.png";
 
 const SERVICES = [
   {
@@ -58,6 +59,11 @@ const ServicesGrid = () => {
 
   return (
     <section className="bg-[#050505] min-h-screen relative overflow-hidden py-24 px-6 md:px-12 lg:px-20">
+
+      {/* Premium Constellation Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
+        <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+      </div>
 
       {/* Background text */}
       <div className="absolute -top-10 right-0 text-[22vw] font-display font-black text-white opacity-[0.015] leading-none pointer-events-none select-none uppercase">SERVE</div>

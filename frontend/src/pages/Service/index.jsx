@@ -1,6 +1,6 @@
 import React from 'react';
-import ServicesGrid from '../../components/ServicesGrid';
-import TestimonialSection from '../../components/TestimonialSection';
+import ServicesGrid from '../../components/features/ServicesGrid';
+import TestimonialSection from '../../components/features/TestimonialSection';
 
 const Service = () => (
     <>

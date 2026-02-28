@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import constellationBg from "../../../assets/cosmic/constellation-bg.png";
 
 const TickItem = ({ text }) => (
   <li className="flex items-start gap-3 text-gray-400 font-light">
@@ -38,6 +39,10 @@ const PricingSection = () => {
 
   return (
     <div className="bg-[#0a0a0c] py-24 px-6 relative overflow-hidden">
+      {/* Premium Constellation Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
+        <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+      </div>
       {/* Background Glows */}
       <div className="absolute top-0 right-1/3 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-[#8A2BE2]/5 rounded-full blur-[120px] pointer-events-none" />

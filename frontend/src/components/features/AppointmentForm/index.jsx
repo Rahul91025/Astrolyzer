@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
 import { toast } from "sonner";
-import { getApiUrl } from "../../config/api";
+import { appointmentService } from "../../../api";
+import { useApi } from "../../../hooks/useApi";
 
 const STEPS = ['Identity', 'Birth Details', 'Session'];
 
@@ -36,13 +36,14 @@ const LineInput = ({ ...props }) => (
 const AppointmentForm = () => {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [data, setData] = useState({
     name: '', email: '', phone: '', gender: '',
     birthDate: '', birthTime: '', birthPlace: '',
     service: '', preferredTime: '', channel: '', notes: ''
   });
+
+  const { loading, execute } = useApi(appointmentService.bookAppointment);
 
   const set = (k, v) => setData(p => ({ ...p, [k]: v }));
 
@@ -69,7 +70,7 @@ const AppointmentForm = () => {
       if (!data.preferredTime) return "Please select a preferred time.";
       if (!data.channel) return "Please select a communication channel.";
     }
-    return null; // No errors
+    return null;
   };
 
   const handeNextStep = () => {
@@ -89,12 +90,11 @@ const AppointmentForm = () => {
       return;
     }
 
-    setLoading(true);
     setError('');
     const loadingToast = toast.loading('Aligning the stars... booking your session');
 
     try {
-      await axios.post(getApiUrl('/api/appointment'), data);
+      await execute(data);
       toast.success('Cosmic session confirmed!', { id: loadingToast });
       setSubmitted(true);
     } catch (err) {
@@ -102,26 +102,19 @@ const AppointmentForm = () => {
       const errRes = err.response?.data?.error || 'Failed to book appointment. Please try again.';
       setError(errRes);
       toast.error(errRes, { id: loadingToast });
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <section className="bg-[#050505] min-h-screen relative overflow-hidden flex flex-col items-center justify-center py-32 px-6 md:px-12">
-
-      {/* Background Text */}
       <div className="absolute bottom-0 right-0 text-[20vw] font-display font-black text-white opacity-[0.02] leading-none pointer-events-none select-none uppercase pr-8 pb-4">
         BOOK
       </div>
-
       <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-purple-900 rounded-full blur-[200px] opacity-10 pointer-events-none" />
-
       <div className="w-full max-w-4xl relative z-10">
 
         {!submitted ? (
           <>
-            {/* Header */}
             <div className="mb-20">
               <p className="text-[#E5C07B] text-[10px] font-bold tracking-[0.4em] uppercase mb-4">Cosmic Session</p>
               <h2 className="text-6xl md:text-8xl font-display font-bold text-white leading-[0.85] tracking-tighter uppercase">
@@ -132,7 +125,6 @@ const AppointmentForm = () => {
               </h2>
             </div>
 
-            {/* Step Progress */}
             <div className="flex items-center gap-0 mb-16 border-b border-white/[0.05]">
               {STEPS.map((s, i) => (
                 <button
@@ -149,8 +141,6 @@ const AppointmentForm = () => {
                   {String(i + 1).padStart(2, '0')} {s}
                 </button>
               ))}
-
-              {/* Progress bar */}
               <div className="flex-1 ml-4 h-[1px] bg-white/[0.05] relative">
                 <motion.div
                   className="absolute top-0 left-0 h-full bg-[#E5C07B]"
@@ -162,8 +152,6 @@ const AppointmentForm = () => {
 
             <form onSubmit={handleSubmit}>
               <AnimatePresence mode="wait">
-
-                {/* ─── STEP 0: Identity ─── */}
                 {step === 0 && (
                   <motion.div key="step0" variants={pageVariants} initial="initial" animate="animate" exit="exit" className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <FieldGroup label="Full Name">
@@ -188,7 +176,6 @@ const AppointmentForm = () => {
                   </motion.div>
                 )}
 
-                {/* ─── STEP 1: Birth Details ─── */}
                 {step === 1 && (
                   <motion.div key="step1" variants={pageVariants} initial="initial" animate="animate" exit="exit" className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <FieldGroup label="Date of Birth">
@@ -205,7 +192,6 @@ const AppointmentForm = () => {
                   </motion.div>
                 )}
 
-                {/* ─── STEP 2: Session Preferences ─── */}
                 {step === 2 && (
                   <motion.div key="step2" variants={pageVariants} initial="initial" animate="animate" exit="exit" className="flex flex-col gap-10">
                     <FieldGroup label="Service Required">
@@ -253,17 +239,14 @@ const AppointmentForm = () => {
                     </FieldGroup>
                   </motion.div>
                 )}
-
               </AnimatePresence>
 
-              {/* Error Message */}
               {error && (
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-6 p-4 border border-red-500/30 bg-red-500/5 rounded-lg">
                   <p className="text-red-400 text-sm font-light">{error}</p>
                 </motion.div>
               )}
 
-              {/* Navigation */}
               <div className="flex items-center justify-between mt-16 pt-8 border-t border-white/[0.05]">
                 {step > 0 ? (
                   <button type="button" onClick={() => setStep(s => s - 1)}
@@ -303,7 +286,6 @@ const AppointmentForm = () => {
             </form>
           </>
         ) : (
-          /* Success */
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import { FaPhoneAlt } from "react-icons/fa";
+import constellationBg from "../../../assets/cosmic/constellation-bg.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,6 +64,9 @@ const AboutAstrology = () => {
 
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 z-0 opacity-8">
+          <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+        </div>
         <div className="absolute top-1/3 left-0 w-[40vw] h-[40vw] bg-[#E5C07B]/5 rounded-full blur-[150px]" />
       </div>
 

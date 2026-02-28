@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
 import { toast } from 'sonner';
-import { getApiUrl } from '../../config/api';
+import { aiService } from '../../../api';
+import { useApi } from '../../../hooks/useApi';
+import constellationBg from '../../../assets/cosmic/constellation-bg.png';
 
 const ZODIAC_SIGNS = [
     'Aries', 'Taurus', 'Gemini', 'Cancer',
@@ -13,29 +14,30 @@ const ZODIAC_SIGNS = [
 const DailyHoroscope = () => {
     const [selectedSign, setSelectedSign] = useState(null);
     const [horoscope, setHoroscope] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const { loading, execute } = useApi(aiService.getDailyHoroscope);
 
     const fetchHoroscope = async (sign) => {
         setSelectedSign(sign);
-        setLoading(true);
         setHoroscope(null);
 
         const loadingToast = toast.loading(`Reading the stars for ${sign}...`);
 
         try {
-            const response = await axios.post(getApiUrl('/api/ai/horoscope'), { sign });
-            setHoroscope(response.data.horoscope);
+            const data = await execute(sign);
+            setHoroscope(data.horoscope);
             toast.success("Cosmic guidance received.", { id: loadingToast });
-        } catch (error) {
-            console.error('Horoscope error:', error);
-            toast.error("The stars to be clouded right now. Try again later.", { id: loadingToast });
-        } finally {
-            setLoading(false);
+        } catch (err) {
+            console.error('Horoscope error:', err);
+            toast.error("The stars seem clouded right now. Try again later.", { id: loadingToast });
         }
     };
 
     return (
         <section className="relative py-24 bg-[#0a0a0c] overflow-hidden border-t border-white/5">
+            {/* Constellation Background Image */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-15">
+                <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+            </div>
             {/* Background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[400px] bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none" />
 

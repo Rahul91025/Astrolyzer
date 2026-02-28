@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaUpload, FaSpinner } from "react-icons/fa";
-import axios from "axios";
 import { toast } from "sonner";
-import { getApiUrl } from "../../config/api";
+import { aiService } from "../../../api";
+import { useApi } from "../../../hooks/useApi";
+import palmArt from "../../../assets/cosmic/palm-reading.png";
 
 const PalmReaderUpload = () => {
   const [image, setImage] = useState(null);
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, execute } = useApi(aiService.analyzePalm);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -23,7 +24,6 @@ const PalmReaderUpload = () => {
       return;
     }
 
-    setLoading(true);
     setResult(null);
     const loadingToast = toast.loading("Consulting the Stars... analyzing your palm lines");
 
@@ -32,17 +32,13 @@ const PalmReaderUpload = () => {
       formData.append("image", image);
       formData.append("additionalInfo", additionalInfo);
 
-      const response = await axios.post(getApiUrl("/api/ai/analyze"), formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const data = await execute(formData);
 
-      setResult(response.data);
+      setResult(data);
       toast.success("Divine reading complete!", { id: loadingToast });
     } catch (error) {
       console.error("Upload error:", error);
       toast.error("The cosmic connection was interrupted. Please try again.", { id: loadingToast });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -97,7 +93,7 @@ const PalmReaderUpload = () => {
               transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
               className="relative z-10 drop-shadow-[0_0_30px_rgba(212,175,55,0.3)]"
             >
-              <img src="/images/palm.png" alt="Mystical Palm" className="w-[80%] h-auto object-contain mx-auto filter brightness-90 sepia-[.3] hue-rotate-[-30deg]" />
+              <img src={palmArt} alt="Mystical Palm" className="w-[100%] h-auto object-contain mx-auto" />
             </motion.div>
           </div>
 

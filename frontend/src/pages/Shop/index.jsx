@@ -9,14 +9,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const PRODUCTS = [
-    { id: 1, name: 'Celestial Birth Chart', category: 'Reports', price: 1299, original: 1899, badge: 'BESTSELLER', desc: 'A hand-illustrated natal chart decoded at the atomic level—every degree, every house, every whisper of fate.', symbol: '✦', color1: '#1a0533', color2: '#2d0a5e', accent: '#c084fc' },
-    { id: 2, name: 'Amethyst Crystal Set', category: 'Crystals', price: 899, original: 1299, badge: 'POPULAR', desc: 'Moonlit amethyst formations, each charged for 72 hours under the open sky.', symbol: '◈', color1: '#0f0a2e', color2: '#1e1052', accent: '#818cf8' },
-    { id: 3, name: 'Love Compatibility', category: 'Reports', price: 999, original: 1499, badge: null, desc: 'Venus and Mars in profound dialogue—your deepest karmic bond decoded page by page.', symbol: '♡', color1: '#2a0011', color2: '#4a0022', accent: '#fb7185' },
-    { id: 4, name: 'Sandalwood Ritual Bundle', category: 'Rituals', price: 399, original: null, badge: 'NEW', desc: 'Hand-rolled in sacred geometry patterns. The smoke carries your intentions to the stars.', symbol: '☽', color1: '#1a0f00', color2: '#3d2500', accent: '#f59e0b' },
-    { id: 5, name: 'Saturn Talisman Ring', category: 'Talismans', price: 2199, original: 2999, badge: 'LIMITED', desc: 'Sterling silver, cast under Saturn retrograde. Wear discipline. Wear power. Wear time.', symbol: '♄', color1: '#0a0a0a', color2: '#1a1a1a', accent: '#94a3b8' },
-    { id: 6, name: 'Annual Cosmic Forecast', category: 'Reports', price: 1799, original: 2499, badge: null, desc: '365 days of celestial intelligence. Your personal cosmos plotted against every transit.', symbol: '⬡', color1: '#000d1a', color2: '#001a33', accent: '#38bdf8' },
-    { id: 7, name: 'Rose Quartz Heart', category: 'Crystals', price: 599, original: null, badge: null, desc: 'Ethically mined, hand-carved. The purest love frequency crystallized into form.', symbol: '✾', color1: '#1a000d', color2: '#33001a', accent: '#f9a8d4' },
-    { id: 8, name: 'Sacred Geometry Pendant', category: 'Talismans', price: 1499, original: 1999, badge: 'NEW', desc: 'Gold-plated Flower of Life—the blueprint of the universe worn close to your heart.', symbol: '❋', color1: '#1a1300', color2: '#332600', accent: '#fbbf24' },
+    { id: 1, name: 'Celestial Birth Chart', category: 'Reports', price: 1299, original: 1899, badge: 'BESTSELLER', desc: 'A hand-illustrated natal chart decoded at the atomic level—every degree, every house, every whisper of fate.', symbol: '✦', color1: '#1a0533', color2: '#2d0a5e', accent: '#c084fc', image: '/images/shop/birth-chart.jpg' },
+    { id: 2, name: 'Amethyst Crystal Set', category: 'Crystals', price: 899, original: 1299, badge: 'POPULAR', desc: 'Moonlit amethyst formations, each charged for 72 hours under the open sky.', symbol: '◈', color1: '#0f0a2e', color2: '#1e1052', accent: '#818cf8', image: '/images/shop/amethyst-crystals.jpg' },
+    { id: 3, name: 'Love Compatibility', category: 'Reports', price: 999, original: 1499, badge: null, desc: 'Venus and Mars in profound dialogue—your deepest karmic bond decoded page by page.', symbol: '♡', color1: '#2a0011', color2: '#4a0022', accent: '#fb7185', image: '/images/shop/love-compatibility.jpg' },
+    { id: 4, name: 'Sandalwood Ritual Bundle', category: 'Rituals', price: 399, original: null, badge: 'NEW', desc: 'Hand-rolled in sacred geometry patterns. The smoke carries your intentions to the stars.', symbol: '☽', color1: '#1a0f00', color2: '#3d2500', accent: '#f59e0b', image: '/images/shop/sandalwood-ritual.jpg' },
+    { id: 5, name: 'Saturn Talisman Ring', category: 'Talismans', price: 2199, original: 2999, badge: 'LIMITED', desc: 'Sterling silver, cast under Saturn retrograde. Wear discipline. Wear power. Wear time.', symbol: '♄', color1: '#0a0a0a', color2: '#1a1a1a', accent: '#94a3b8', image: '/images/shop/saturn-ring.jpg' },
+    { id: 6, name: 'Annual Cosmic Forecast', category: 'Reports', price: 1799, original: 2499, badge: null, desc: '365 days of celestial intelligence. Your personal cosmos plotted against every transit.', symbol: '⬡', color1: '#000d1a', color2: '#001a33', accent: '#38bdf8', image: '/images/shop/annual-forecast.jpg' },
+    { id: 7, name: 'Rose Quartz Heart', category: 'Crystals', price: 599, original: null, badge: null, desc: 'Ethically mined, hand-carved. The purest love frequency crystallized into form.', symbol: '✾', color1: '#1a000d', color2: '#33001a', accent: '#f9a8d4', image: '/images/shop/rose-quartz.jpg' },
+    { id: 8, name: 'Sacred Geometry Pendant', category: 'Talismans', price: 1499, original: 1999, badge: 'NEW', desc: 'Gold-plated Flower of Life—the blueprint of the universe worn close to your heart.', symbol: '❋', color1: '#1a1300', color2: '#332600', accent: '#fbbf24', image: '/images/shop/sacred-geometry.jpg' },
 ];
 
 const CATS = ['All', 'Reports', 'Crystals', 'Talismans', 'Rituals'];
@@ -291,20 +291,18 @@ const Shop = () => {
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* Featured Product Image (for Celestial Birth Chart) */}
+                    {/* Featured Product Image (Premium Quality) */}
                     <AnimatePresence mode="wait">
-                        {activeProduct.id === 1 && (
-                            <motion.div
-                                key="birth-chart-img"
-                                initial={{ opacity: 0, scale: 1.1 }}
-                                animate={{ opacity: 0.25, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                transition={{ duration: 0.8, ease: 'easeOut' }}
-                                className="absolute inset-0 pointer-events-none z-[1]"
-                            >
-                                <img src={birthChartImg} alt="" className="w-full h-full object-cover mix-blend-lighten filter brightness-[0.6]" />
-                            </motion.div>
-                        )}
+                        <motion.div
+                            key={activeProduct.id + '-img'}
+                            initial={{ opacity: 0, scale: 1.1 }}
+                            animate={{ opacity: 0.6, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.8, ease: 'easeOut' }}
+                            className="absolute inset-0 pointer-events-none z-[1]"
+                        >
+                            <img src={activeProduct.image} alt={activeProduct.name} className="w-full h-full object-cover mix-blend-screen filter brightness-[0.7]" />
+                        </motion.div>
                     </AnimatePresence>
 
                     {/* Foreground info */}
@@ -400,8 +398,11 @@ const Shop = () => {
                             key={p.id}
                             className="flex-shrink-0 w-[75vw] h-full relative border-r border-white/[0.04] group overflow-hidden cursor-none"
                         >
-                            {/* Background */}
-                            <div className="absolute inset-0 transition-all duration-700 group-hover:scale-105" style={{ background: `linear-gradient(135deg, ${p.color1} 0%, ${p.color2} 60%, #030303 100%)` }} />
+                            {/* Background Image */}
+                            <div className="absolute inset-0 transition-all duration-700 group-hover:scale-105">
+                                <img src={p.image} alt={p.name} className="w-full h-full object-cover opacity-60 mix-blend-screen" />
+                                <div className="absolute inset-0" style={{ background: `linear-gradient(0deg, #030303 10%, transparent 60%, ${p.color1}50 100%)` }} />
+                            </div>
 
                             {/* Giant symbol */}
                             <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
@@ -535,8 +536,18 @@ const Shop = () => {
                                     onMouseEnter={() => setHoveredCard(p.id)}
                                     onMouseLeave={() => setHoveredCard(null)}
                                 >
-                                    {/* Background */}
-                                    <div className="absolute inset-0 transition-all duration-700" style={{ background: `linear-gradient(135deg, ${p.color1}, ${p.color2})` }} />
+                                    {/* Background Image */}
+                                    <div className="absolute inset-0 transition-all duration-700 overflow-hidden">
+                                        <motion.img
+                                            src={p.image}
+                                            alt={p.name}
+                                            className="w-full h-full object-cover"
+                                            animate={{ scale: isHovered ? 1.05 : 1.0, filter: isHovered ? "brightness(0.6)" : "brightness(0.35)" }}
+                                            transition={{ duration: 0.7 }}
+                                        />
+                                        {/* Gradient overlay to ensure text readability */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+                                    </div>
 
                                     {/* Hover overlay - accent fill from corner */}
                                     <motion.div

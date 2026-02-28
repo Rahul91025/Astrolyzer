@@ -1,6 +1,8 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Toaster } from 'sonner';
+import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -77,6 +79,10 @@ const App = () => {
   return (
     <ErrorBoundary>
       <Router>
+        <Toaster position="top-center" theme="dark" toastOptions={{
+          style: { background: '#111', border: '1px solid #333', color: '#fff', fontSize: '14px', borderRadius: '8px' },
+          className: 'font-sans tracking-wide'
+        }} />
         <div className="min-h-screen bg-[#050505] text-white flex flex-col font-sans selection:bg-[#E5C07B]/30 selection:text-white cursor-none">
           <CustomCursor />
           <NoiseOverlay />

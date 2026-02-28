@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { toast } from "sonner";
 import { getApiUrl } from "../../config/api";
 
 const STEPS = ['Identity', 'Birth Details', 'Session'];
@@ -51,16 +52,56 @@ const AppointmentForm = () => {
     exit: { opacity: 0, x: -40, transition: { duration: 0.35, ease: [0.76, 0, 0.24, 1] } }
   };
 
+  const validateStep = (currentStep) => {
+    if (currentStep === 0) {
+      if (!data.name.trim()) return "Please enter your cosmic name.";
+      if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Please enter a valid email address.";
+      if (!data.phone.trim() || !/^\+?[1-9]\d{8,14}$/.test(data.phone.replace(/[\s-]/g, ''))) return "Please enter a valid phone number.";
+      if (!data.gender) return "Please select a gender.";
+    }
+    if (currentStep === 1) {
+      if (!data.birthDate) return "Please enter your Date of Birth.";
+      if (!data.birthTime) return "Please enter your Time of Birth.";
+      if (!data.birthPlace.trim()) return "Please enter your Place of Birth.";
+    }
+    if (currentStep === 2) {
+      if (!data.service) return "Please select a service.";
+      if (!data.preferredTime) return "Please select a preferred time.";
+      if (!data.channel) return "Please select a communication channel.";
+    }
+    return null; // No errors
+  };
+
+  const handeNextStep = () => {
+    const errorMsg = validateStep(step);
+    if (errorMsg) {
+      toast.error(errorMsg);
+      return;
+    }
+    setStep(s => s + 1);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errorMsg = validateStep(step);
+    if (errorMsg) {
+      toast.error(errorMsg);
+      return;
+    }
+
     setLoading(true);
     setError('');
+    const loadingToast = toast.loading('Aligning the stars... booking your session');
+
     try {
       await axios.post(getApiUrl('/api/appointment'), data);
+      toast.success('Cosmic session confirmed!', { id: loadingToast });
       setSubmitted(true);
     } catch (err) {
       console.error('Appointment error:', err);
-      setError(err.response?.data?.error || 'Failed to book appointment. Please try again.');
+      const errRes = err.response?.data?.error || 'Failed to book appointment. Please try again.';
+      setError(errRes);
+      toast.error(errRes, { id: loadingToast });
     } finally {
       setLoading(false);
     }
@@ -233,7 +274,7 @@ const AppointmentForm = () => {
                 ) : <div />}
 
                 {step < STEPS.length - 1 ? (
-                  <button type="button" onClick={() => setStep(s => s + 1)}
+                  <button type="button" onClick={handeNextStep}
                     className="magnetic group flex items-center gap-4 text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-[#E5C07B] transition-colors duration-300">
                     Next: {STEPS[step + 1]}
                     <div className="w-8 h-[1px] bg-current group-hover:w-14 transition-all duration-500" />

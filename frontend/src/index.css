@@ -1,12 +1,18 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-mystic-dark: #050505;
-  --color-mystic-card: rgba(10, 10, 10, 0.8);
-  --color-mystic-gold: #E5C07B;
-  --color-mystic-purple: #4B0082;
-  --color-mystic-accent: #8A2BE2;
+/* Mapping our dynamic CSS variables to Tailwind colors in root to avoid @theme linter errors */
+:root {
+  --color-mystic-bg: var(--bg-primary);
+  --color-mystic-bg-sec: var(--bg-secondary);
+  --color-mystic-text: var(--text-primary);
+  --color-mystic-text-sec: var(--text-secondary);
+  --color-mystic-gold: var(--accent-gold);
+  --color-mystic-purple: var(--accent-purple);
+  --color-mystic-border: var(--border-color);
+  --color-mystic-border-subtle: var(--border-subtle);
+  --color-mystic-card: var(--card-bg);
+
   --font-display: 'Playfair Display', serif;
   --font-sans: 'Outfit', sans-serif;
   --font-inter: 'Inter', sans-serif;
@@ -14,8 +20,51 @@
 }
 
 @layer base {
+  :root {
+    /* DEFAULT (DARK MODE) */
+    --bg-primary: #050505;
+    --bg-secondary: #0a0a0c;
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+    /* gray-400 equivalent */
+    --accent-gold: #E5C07B;
+    --accent-purple: #4B0082;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-subtle: rgba(255, 255, 255, 0.04);
+    --card-bg: rgba(20, 20, 24, 0.6);
+  }
+
+  .light {
+    /* LIGHT MODE */
+    --bg-primary: #F9F7F1;
+    /* Ivory/Parchment */
+    --bg-secondary: #F0EBE0;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5A5A5A;
+    --accent-gold: #C69A45;
+    /* Slightly deeper gold for white contrast */
+    --accent-purple: #6A1B9A;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-subtle: rgba(0, 0, 0, 0.04);
+    --card-bg: rgba(255, 255, 255, 0.7);
+  }
+
   body {
-    @apply bg-[#050505] text-white font-sans antialiased selection:bg-[#E5C07B]/30 selection:text-white overflow-x-hidden cursor-none;
+    background-color: var(--color-mystic-bg);
+    color: var(--color-mystic-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    cursor: none;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
+  }
+
+  body *::selection {
+    background-color: color-mix(in srgb, var(--color-mystic-gold) 30%, transparent);
+    color: var(--color-mystic-text);
   }
 
   h1,
@@ -24,29 +73,87 @@
   h4,
   h5,
   h6 {
-    @apply font-display tracking-tight text-white;
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    color: var(--color-mystic-text);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
   }
 }
 
 @layer utilities {
   .glassmorphism {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
+    background-color: color-mix(in srgb, var(--color-mystic-bg-sec) 5%, transparent);
+    backdrop-filter: blur(24px);
+    border: 1px solid var(--color-mystic-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
   }
 
   .glass-card {
-    @apply bg-[#141418]/60 backdrop-blur-lg border border-white/5 rounded-2xl shadow-glass;
+    background-color: var(--color-mystic-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--color-mystic-border-subtle);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-glass);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#FFDF73] to-[#D4AF37];
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #D4AF37, #FFDF73, #D4AF37);
   }
 
   .text-gradient-purple {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#8A2BE2] to-[#4B0082];
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, var(--color-mystic-accent), var(--color-mystic-purple));
   }
 
   .input-premium {
-    @apply w-full px-5 py-3 text-sm text-gray-200 border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all duration-300;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--color-mystic-text);
+    border: 1px solid var(--color-mystic-border);
+    border-radius: 0.75rem;
+    background-color: var(--color-mystic-card);
+    backdrop-filter: blur(4px);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+
+  .input-premium:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--color-mystic-gold);
+    border-color: transparent;
+  }
+
+  /* Handles blend modes beautifully between themes */
+  .premium-blend {
+    mix-blend-mode: screen;
+  }
+
+  .light .premium-blend {
+    mix-blend-mode: multiply;
+  }
+
+  /* Cosmic images that don't look good multiplied can be inverted instead */
+  .premium-invert-light {
+    filter: invert(0);
+  }
+
+  .light .premium-invert-light {
+    filter: invert(1) hue-rotate(180deg);
   }
 }
 
@@ -56,7 +163,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0c;
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {

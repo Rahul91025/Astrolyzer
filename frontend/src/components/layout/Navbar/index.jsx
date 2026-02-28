@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRegHandPaper } from "react-icons/fa";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "../../../context/ThemeContext";
 
 const navItems = [
   { name: "Home", path: "/", num: "01" },
@@ -15,6 +17,7 @@ const navItems = [
 
 const Navbar = () => {
   const location = useLocation();
+  const { theme, toggleTheme, isDark } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -90,10 +93,10 @@ const Navbar = () => {
 
             {/* Logo Typography */}
             <div className="flex flex-col pt-1">
-              <span className="font-display text-xl md:text-2xl font-black tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 uppercase leading-none group-hover:from-[#E5C07B] group-hover:to-white transition-all duration-700">
+              <span className={`font-display text-xl md:text-2xl font-black tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r uppercase leading-none transition-all duration-700 ${isDark ? 'from-white via-gray-200 to-gray-500 group-hover:from-[#E5C07B] group-hover:to-white' : 'from-gray-900 via-gray-700 to-[#E5C07B] group-hover:from-[#E5C07B] group-hover:to-gray-900'}`}>
                 ASTROLOGER
               </span>
-              <span className="text-[#E5C07B] text-[7px] font-black tracking-[0.5em] uppercase opacity-60 mt-1 pl-1">
+              <span className="text-[#E5C07B] text-[7px] font-black tracking-[0.5em] uppercase opacity-80 mt-1 pl-1">
                 Cosmic Intelligence
               </span>
             </div>
@@ -120,7 +123,16 @@ const Navbar = () => {
               Palm AI
             </Link>
 
-            <div className="hidden md:block border-l border-white/10 pl-6">
+            <div className="hidden md:flex items-center gap-6 border-l border-white/10 pl-6">
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className="magnetic flex items-center justify-center w-8 h-8 rounded-full border border-white/20 hover:border-[#E5C07B] text-white hover:text-[#E5C07B] transition-all duration-300"
+                aria-label="Toggle Theme"
+              >
+                {isDark ? <Sun size={14} className="animate-[spin_10s_linear_infinite]" /> : <Moon size={14} className="animate-[pulse_4s_ease-in-out_infinite]" />}
+              </button>
+
               <SignedOut>
                 <SignInButton mode="modal">
                   <button className="magnetic px-5 py-2 border border-white/20 hover:border-[#E5C07B] text-xs font-bold tracking-[0.15em] uppercase text-white transition-all duration-300 hover:text-[#E5C07B]">
@@ -201,6 +213,11 @@ const Navbar = () => {
         {/* Right Column - Info */}
         <div className="hidden lg:flex lg:w-[300px] xl:w-[400px] flex-col justify-between border-l border-white/[0.05] px-12 py-28">
           <div>
+            <p className="text-gray-600 text-[10px] font-bold tracking-[0.4em] uppercase mb-8">Theme</p>
+            <button onClick={toggleTheme} className="flex items-center gap-3 text-white hover:text-[#E5C07B] transition-colors duration-300 border border-white/20 hover:border-[#E5C07B] px-5 py-3 rounded-full mb-12">
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+              <span className="text-xs uppercase tracking-widest">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+            </button>
             <p className="text-gray-600 text-[10px] font-bold tracking-[0.4em] uppercase mb-8">Constellation</p>
             <p className="text-white font-display text-2xl font-light leading-tight">
               "The cosmos is within us. We are made of star-stuff."

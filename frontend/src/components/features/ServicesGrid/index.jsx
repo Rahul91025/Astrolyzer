@@ -58,25 +58,25 @@ const ServicesGrid = () => {
   const [active, setActive] = useState(null);
 
   return (
-    <section className="bg-[#050505] min-h-screen relative overflow-hidden py-24 px-6 md:px-12 lg:px-20">
+    <section className="bg-mystic-bg min-h-screen relative overflow-hidden py-24 px-6 md:px-12 lg:px-20 transition-colors duration-700">
 
       {/* Premium Constellation Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
-        <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40 premium-invert-light transition-all duration-700">
+        <img src={constellationBg} alt="" className="w-full h-full object-cover premium-blend" />
       </div>
 
       {/* Background text */}
-      <div className="absolute -top-10 right-0 text-[22vw] font-display font-black text-white opacity-[0.015] leading-none pointer-events-none select-none uppercase">SERVE</div>
+      <div className="absolute -top-10 right-0 text-[22vw] font-display font-black text-mystic-text opacity-[0.015] leading-none pointer-events-none select-none uppercase transition-colors duration-700">SERVE</div>
 
       {/* Header */}
       <div className="max-w-[1600px] mx-auto mb-20">
-        <p className="text-[#E5C07B] text-[10px] font-black tracking-[0.5em] uppercase mb-5">What We Offer</p>
+        <p className="text-mystic-gold text-[10px] font-black tracking-[0.5em] uppercase mb-5 transition-colors duration-700">What We Offer</p>
         <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6">
-          <h2 className="text-[12vw] md:text-[8vw] xl:text-[6vw] font-display font-bold text-white uppercase leading-[0.82] tracking-tighter">
+          <h2 className="text-[12vw] md:text-[8vw] xl:text-[6vw] font-display font-bold text-mystic-text uppercase leading-[0.82] tracking-tighter transition-colors duration-700">
             DIVINE<br />
-            <span className="text-transparent italic font-light" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>OFFERINGS</span>
+            <span className="text-mystic-bg italic font-light transition-colors duration-700 text-mystic-text-sec" style={{ WebkitTextStroke: '1px currentColor' }}>OFFERINGS</span>
           </h2>
-          <p className="text-gray-600 font-light max-w-xs xl:mb-2 leading-relaxed text-sm">
+          <p className="text-mystic-text-sec font-light max-w-xs xl:mb-2 leading-relaxed text-sm transition-colors duration-700">
             Eight doorways into cosmic intelligence. Each service a universe unto itself.
           </p>
         </div>
@@ -103,8 +103,8 @@ const ServicesGrid = () => {
 
                 {/* Title + sub */}
                 <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
-                  <h3 className="font-display text-3xl md:text-4xl xl:text-5xl font-light text-white transition-colors duration-500 uppercase tracking-tight leading-none"
-                    style={{ color: isActive ? svc.color : 'white' }}>
+                  <h3 className="font-display text-3xl md:text-4xl xl:text-5xl font-light text-mystic-text transition-colors duration-500 uppercase tracking-tight leading-none"
+                    style={{ color: isActive ? svc.color : 'var(--color-mystic-text)' }}>
                     {svc.title}
                   </h3>
                   <span className="text-[10px] font-black tracking-[0.3em] uppercase opacity-0 group-hover:opacity-100 transition-all duration-500"
@@ -144,7 +144,7 @@ const ServicesGrid = () => {
 
                       {/* Description */}
                       <div className="flex-1">
-                        <p className="text-gray-400 font-light leading-relaxed text-lg md:text-xl max-w-2xl">
+                        <p className="text-mystic-text-sec font-light leading-relaxed text-lg md:text-xl max-w-2xl transition-colors duration-700">
                           {svc.desc}
                         </p>
                         <div className="flex flex-wrap gap-2 mt-6">
@@ -175,13 +175,13 @@ const ServicesGrid = () => {
           );
         })}
         {/* Bottom border */}
-        <div className="border-t border-white/[0.05]" />
+        <div className="border-t border-mystic-border-subtle transition-colors duration-700" />
       </div>
 
       {/* Bottom CTA */}
       <div className="max-w-[1600px] mx-auto mt-20 flex items-center justify-between">
-        <p className="text-gray-700 text-xs font-bold tracking-widest uppercase">8 Cosmic Services</p>
-        <Link to="/appointment" className="magnetic group flex items-center gap-4 text-xs font-black tracking-[0.2em] uppercase text-[#E5C07B] hover:text-white transition-colors duration-300">
+        <p className="text-mystic-text-sec text-xs font-bold tracking-widest uppercase transition-colors duration-700">8 Cosmic Services</p>
+        <Link to="/appointment" className="magnetic group flex items-center gap-4 text-xs font-black tracking-[0.2em] uppercase text-mystic-gold hover:text-mystic-text transition-colors duration-300">
           Book a Consultation
           <div className="w-8 h-[1px] bg-current group-hover:w-14 transition-all duration-500" />
         </Link>

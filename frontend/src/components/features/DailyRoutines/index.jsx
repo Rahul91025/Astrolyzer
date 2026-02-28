@@ -89,24 +89,24 @@ const DailyRoutines = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="bg-[#050505] py-32 px-6 md:px-10 lg:px-20 relative overflow-hidden min-h-screen flex flex-col justify-center">
+    <section ref={containerRef} className="bg-mystic-bg py-32 px-6 md:px-10 lg:px-20 relative overflow-hidden min-h-screen flex flex-col justify-center transition-colors duration-700">
 
       {/* Massive Background Marquee */}
       <div className="absolute top-[20%] left-0 w-[300vw] pointer-events-none z-0 opacity-[0.03] flex">
-        <h2 ref={marqueeRef} className="text-[20vw] font-display font-bold text-white whitespace-nowrap uppercase tracking-tighter leading-none">
+        <h2 ref={marqueeRef} className="text-[20vw] font-display font-bold text-mystic-text whitespace-nowrap uppercase tracking-tighter leading-none transition-colors duration-700">
           COSMIC ROUTINES — DIVINE PATHWAY — COSMIC ROUTINES — DIVINE PATHWAY —
         </h2>
       </div>
 
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E5C07B]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-mystic-gold/10 rounded-full blur-[120px] pointer-events-none transition-colors duration-700" />
 
       {/* Section Heading */}
       <div className="rt-title-container text-center mb-32 relative z-10 w-full flex flex-col items-center">
         <div className="rt-title inline-flex items-center gap-4 mb-6">
-          <span className="text-white text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">Spiritual Architecture</span>
+          <span className="text-mystic-text text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-700">Spiritual Architecture</span>
         </div>
-        <h2 className="rt-title text-6xl md:text-8xl font-display font-bold text-white mb-6 tracking-tighter uppercase leading-[0.9]">
-          SACRED <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-white italic font-light ml-24">RITUALS</span>
+        <h2 className="rt-title text-6xl md:text-8xl font-display font-bold text-mystic-text mb-6 tracking-tighter uppercase leading-[0.9] transition-colors duration-700">
+          SACRED <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-mystic-text-sec to-mystic-text italic font-light ml-24 transition-colors duration-700">RITUALS</span>
         </h2>
       </div>
 
@@ -116,37 +116,37 @@ const DailyRoutines = () => {
           <div
             key={index}
             ref={el => cardsRef.current[index] = el}
-            className="group flex flex-col items-start justify-between min-h-[500px] p-8 md:p-10 relative overflow-hidden bg-[#0a0a0c] border border-white/[0.05] hover:border-[#E5C07B]/30 transition-colors duration-700"
+            className="group flex flex-col items-start justify-between min-h-[500px] p-8 md:p-10 relative overflow-hidden bg-mystic-bg-sec border border-mystic-border-subtle hover:border-mystic-gold/30 transition-colors duration-700"
           >
             {/* Soft internal glow */}
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#E5C07B]/0 to-[#E5C07B]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-mystic-gold/0 to-mystic-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
             {/* Icon Block */}
-            <div className="w-16 h-16 rounded-full flex items-center justify-center mb-12 relative z-10 overflow-hidden bg-white/5 border border-white/10 group-hover:bg-[#E5C07B]/10 group-hover:border-[#E5C07B]/50 transition-all duration-700">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mb-12 relative z-10 overflow-hidden bg-mystic-text/5 border border-mystic-border group-hover:bg-mystic-gold/10 group-hover:border-mystic-gold/50 transition-all duration-700">
               <img
                 src={service.icon}
                 alt={service.title}
-                className="w-8 h-8 object-contain filter invert opacity-70 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
+                className="w-8 h-8 object-contain premium-invert-light opacity-70 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
               />
             </div>
 
             <div className="flex flex-col items-start w-full z-10">
-              <h3 className="text-2xl md:text-3xl font-display font-light text-white mb-6 uppercase tracking-wide group-hover:text-[#E5C07B] transition-colors duration-500">
+              <h3 className="text-2xl md:text-3xl font-display font-light text-mystic-text mb-6 uppercase tracking-wide group-hover:text-mystic-gold transition-colors duration-500">
                 {service.title}
               </h3>
 
-              <p className="text-sm md:text-base text-gray-500 leading-relaxed font-light mb-12">
+              <p className="text-sm md:text-base text-mystic-text-sec leading-relaxed font-light mb-12 transition-colors duration-700">
                 {service.description}
               </p>
             </div>
 
             {/* Magnetic Button */}
-            <div className="z-10 w-full pt-6 border-t border-white/[0.05] group-hover:border-[#E5C07B]/20 transition-colors duration-700 mt-auto">
+            <div className="z-10 w-full pt-6 border-t border-mystic-border-subtle group-hover:border-mystic-gold/20 transition-colors duration-700 mt-auto">
               <button className="magnetic flex items-center gap-4 group/btn w-fit">
-                <span className="text-xs font-bold tracking-[0.2em] uppercase text-white group-hover/btn:text-[#E5C07B] transition-colors duration-300">
+                <span className="text-xs font-bold tracking-[0.2em] uppercase text-mystic-text group-hover/btn:text-mystic-gold transition-colors duration-300">
                   Initiate
                 </span>
-                <div className="w-8 h-[1px] bg-white group-hover/btn:bg-[#E5C07B] group-hover/btn:w-16 transition-all duration-500" />
+                <div className="w-8 h-[1px] bg-mystic-text group-hover/btn:bg-mystic-gold group-hover/btn:w-16 transition-all duration-500" />
               </button>
             </div>
           </div>

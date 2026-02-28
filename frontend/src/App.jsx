@@ -6,6 +6,7 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
+import { useTheme } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/layout/ErrorBoundary';
@@ -51,6 +52,8 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
+  const { theme } = useTheme();
+
   // Initialize Lenis smooth scroll and sync with GSAP ticker
   useEffect(() => {
     const lenis = new Lenis({
@@ -78,11 +81,17 @@ const App = () => {
   return (
     <ErrorBoundary>
       <Router>
-        <Toaster position="top-center" theme="dark" toastOptions={{
-          style: { background: '#111', border: '1px solid #333', color: '#fff', fontSize: '14px', borderRadius: '8px' },
+        <Toaster position="top-center" theme={theme} toastOptions={{
+          style: {
+            background: theme === 'dark' ? 'var(--color-mystic-bg-sec)' : '#ffffff',
+            border: `1px solid var(--color-mystic-border)`,
+            color: 'var(--color-mystic-text)',
+            fontSize: '14px',
+            borderRadius: '8px'
+          },
           className: 'font-sans tracking-wide'
         }} />
-        <div className="min-h-screen bg-[#050505] text-white flex flex-col font-sans selection:bg-[#E5C07B]/30 selection:text-white cursor-none">
+        <div className="min-h-screen bg-mystic-bg text-mystic-text flex flex-col font-sans selection:bg-mystic-gold/30 selection:text-mystic-text cursor-none transition-colors duration-700">
           <CustomCursor />
           <NoiseOverlay />
           <Navbar />

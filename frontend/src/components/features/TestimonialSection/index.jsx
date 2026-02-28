@@ -45,24 +45,24 @@ const TestimonialSection = () => {
   const t = TESTIMONIALS[current];
 
   return (
-    <section className="bg-[#050505] relative overflow-hidden py-28 px-6 md:px-12 lg:px-20">
+    <section className="bg-mystic-bg relative overflow-hidden py-28 px-6 md:px-12 lg:px-20 transition-colors duration-700">
 
       {/* Premium Constellation Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
-        <img src={constellationBg} alt="" className="w-full h-full object-cover mix-blend-screen" />
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40 premium-invert-light transition-all duration-700">
+        <img src={constellationBg} alt="" className="w-full h-full object-cover premium-blend" />
       </div>
 
       {/* Background text */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[25vw] font-display font-black text-white opacity-[0.012] leading-none pointer-events-none select-none uppercase whitespace-nowrap">VOICES</div>
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[25vw] font-display font-black text-mystic-text opacity-[0.012] leading-none pointer-events-none select-none uppercase whitespace-nowrap transition-colors duration-700">VOICES</div>
 
       <div className="max-w-[1600px] mx-auto relative z-10">
 
         {/* Header */}
         <div className="mb-20">
-          <p className="text-[#E5C07B] text-[10px] font-black tracking-[0.5em] uppercase mb-5">Testimonials</p>
-          <h2 className="text-[10vw] md:text-[6vw] font-display font-bold text-white uppercase leading-[0.82] tracking-tighter">
+          <p className="text-mystic-gold text-[10px] font-black tracking-[0.5em] uppercase mb-5 transition-colors duration-700">Testimonials</p>
+          <h2 className="text-[10vw] md:text-[6vw] font-display font-bold text-mystic-text uppercase leading-[0.82] tracking-tighter transition-colors duration-700">
             COSMIC<br />
-            <span className="text-transparent italic font-light" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>VOICES</span>
+            <span className="text-mystic-bg italic font-light transition-colors duration-700 text-mystic-text-sec" style={{ WebkitTextStroke: '1px currentColor' }}>VOICES</span>
           </h2>
         </div>
 
@@ -72,7 +72,7 @@ const TestimonialSection = () => {
           {/* Large Quote Block */}
           <div className="xl:col-span-8 relative">
             {/* Opening mark */}
-            <div className="font-display text-[10rem] xl:text-[14rem] text-white/5 leading-none select-none absolute -top-10 -left-4">"</div>
+            <div className="font-display text-[10rem] xl:text-[14rem] text-mystic-text opacity-5 leading-none select-none absolute -top-10 -left-4 transition-colors duration-700">"</div>
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -83,22 +83,22 @@ const TestimonialSection = () => {
                 transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
                 className="relative z-10 pt-12"
               >
-                <p className="text-2xl md:text-3xl xl:text-4xl text-white font-display font-light leading-[1.3] italic tracking-tight mb-12">
+                <p className="text-2xl md:text-3xl xl:text-4xl text-mystic-text font-display font-light leading-[1.3] italic tracking-tight mb-12 transition-colors duration-700">
                   {t.quote}
                 </p>
 
                 <div className="flex items-center gap-5">
                   {/* Symbol avatar */}
-                  <div className="w-14 h-14 border border-[#E5C07B]/30 flex items-center justify-center text-2xl text-[#E5C07B] flex-shrink-0">
+                  <div className="w-14 h-14 border border-mystic-gold/30 flex items-center justify-center text-2xl text-mystic-gold flex-shrink-0 transition-colors duration-700">
                     {t.symbol}
                   </div>
                   <div>
-                    <p className="text-white text-base font-display font-light">{t.name}</p>
-                    <p className="text-[#E5C07B] text-[10px] font-black tracking-[0.3em] uppercase mt-1">{t.role}</p>
+                    <p className="text-mystic-text text-base font-display font-light transition-colors duration-700">{t.name}</p>
+                    <p className="text-mystic-gold text-[10px] font-black tracking-[0.3em] uppercase mt-1 transition-colors duration-700">{t.role}</p>
                   </div>
                   <div className="ml-auto flex items-center gap-1">
                     {Array(t.stars).fill(0).map((_, i) => (
-                      <span key={i} className="text-[#E5C07B] text-sm">✦</span>
+                      <span key={i} className="text-mystic-gold text-sm transition-colors duration-700">✦</span>
                     ))}
                   </div>
                 </div>
@@ -106,10 +106,10 @@ const TestimonialSection = () => {
             </AnimatePresence>
 
             {/* Navigation */}
-            <div className="flex items-center gap-6 mt-14 pt-8 border-t border-white/[0.06]">
+            <div className="flex items-center gap-6 mt-14 pt-8 border-t border-mystic-border-subtle transition-colors duration-700">
               <button
                 onClick={() => setCurrent(c => (c - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-                className="magnetic w-10 h-10 border border-white/10 hover:border-[#E5C07B]/60 flex items-center justify-center text-gray-600 hover:text-[#E5C07B] transition-all duration-400"
+                className="magnetic w-10 h-10 border border-mystic-border hover:border-mystic-gold/60 flex items-center justify-center text-mystic-text-sec hover:text-mystic-gold transition-all duration-400"
               >
                 ←
               </button>
@@ -118,18 +118,18 @@ const TestimonialSection = () => {
                   <button key={i} onClick={() => setCurrent(i)} className="magnetic">
                     <motion.div
                       className="rounded-full transition-all duration-400"
-                      animate={{ width: i === current ? 24 : 4, height: 4, background: i === current ? '#E5C07B' : 'rgba(255,255,255,0.15)' }}
+                      animate={{ width: i === current ? 24 : 4, height: 4, background: i === current ? 'var(--color-mystic-gold)' : 'var(--color-mystic-border)' }}
                     />
                   </button>
                 ))}
               </div>
               <button
                 onClick={() => setCurrent(c => (c + 1) % TESTIMONIALS.length)}
-                className="magnetic w-10 h-10 border border-white/10 hover:border-[#E5C07B]/60 flex items-center justify-center text-gray-600 hover:text-[#E5C07B] transition-all duration-400"
+                className="magnetic w-10 h-10 border border-mystic-border hover:border-mystic-gold/60 flex items-center justify-center text-mystic-text-sec hover:text-mystic-gold transition-all duration-400"
               >
                 →
               </button>
-              <span className="ml-auto text-[10px] font-black tracking-widest text-gray-700 uppercase">
+              <span className="ml-auto text-[10px] font-black tracking-widest text-mystic-text-sec uppercase transition-colors duration-700">
                 {String(current + 1).padStart(2, '0')} / {String(TESTIMONIALS.length).padStart(2, '0')}
               </span>
             </div>
@@ -137,19 +137,20 @@ const TestimonialSection = () => {
 
           {/* Right: All testimonial list */}
           <div className="xl:col-span-4 flex flex-col gap-0">
-            <p className="text-[9px] font-black tracking-[0.4em] uppercase text-gray-700 mb-6">All Reviews</p>
+            <p className="text-[9px] font-black tracking-[0.4em] uppercase text-mystic-text-sec mb-6 transition-colors duration-700">All Reviews</p>
             {TESTIMONIALS.map((tm, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`group flex items-start gap-4 py-5 border-b border-white/[0.04] text-left transition-all duration-400 ${i === current ? 'opacity-100' : 'opacity-30 hover:opacity-60'}`}
+                className={`group flex items-start gap-4 py-5 border-b border-mystic-border-subtle text-left transition-all duration-400 ${i === current ? 'opacity-100' : 'opacity-30 hover:opacity-60'}`}
               >
-                <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center border transition-all duration-400" style={{ borderColor: i === current ? `${TESTIMONIALS[i].symbol === t.symbol ? '#E5C07B' : '#ffffff30'}` : 'rgba(255,255,255,0.06)', color: i === current ? '#E5C07B' : '#333' }}>
+                <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center border transition-all duration-400 border-mystic-border"
+                  style={{ color: i === current ? 'var(--color-mystic-gold)' : 'var(--color-mystic-text)' }}>
                   <span className="text-xs">{tm.symbol}</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white text-xs font-light line-clamp-2 leading-relaxed">{tm.quote.substring(0, 80)}…</p>
-                  <p className="text-[9px] font-bold tracking-wider mt-2 text-gray-600">{tm.name}</p>
+                  <p className="text-mystic-text text-xs font-light line-clamp-2 leading-relaxed transition-colors duration-700">{tm.quote.substring(0, 80)}…</p>
+                  <p className="text-[9px] font-bold tracking-wider mt-2 text-mystic-text-sec transition-colors duration-700">{tm.name}</p>
                 </div>
               </button>
             ))}
@@ -157,7 +158,7 @@ const TestimonialSection = () => {
         </div>
 
         {/* Bottom stat strip */}
-        <div className="mt-20 pt-8 border-t border-white/[0.04] grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="mt-20 pt-8 border-t border-mystic-border-subtle grid grid-cols-2 md:grid-cols-4 gap-8 transition-colors duration-700">
           {[
             { num: '4,800+', label: 'Readings Delivered' },
             { num: '98%', label: 'Satisfaction Rate' },
@@ -165,8 +166,8 @@ const TestimonialSection = () => {
             { num: '47+', label: 'Countries Served' },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col gap-1">
-              <p className="font-display text-4xl md:text-5xl font-light text-white">{stat.num}</p>
-              <p className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-600">{stat.label}</p>
+              <p className="font-display text-4xl md:text-5xl font-light text-mystic-text transition-colors duration-700">{stat.num}</p>
+              <p className="text-[10px] font-black tracking-[0.3em] uppercase text-mystic-text-sec transition-colors duration-700">{stat.label}</p>
             </div>
           ))}
         </div>

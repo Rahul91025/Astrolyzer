@@ -66,73 +66,73 @@ const ZodiacLookup = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="bg-[#050505] py-32 px-6 md:px-12 relative overflow-hidden min-h-screen flex flex-col xl:flex-row items-center justify-center gap-12">
+    <section ref={containerRef} className="bg-mystic-bg py-32 px-6 md:px-12 relative overflow-hidden min-h-screen flex flex-col xl:flex-row items-center justify-center gap-12 transition-colors duration-700">
 
       {/* Premium Section Background */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <img src={zodiacBg} alt="" className="w-full h-full object-cover mix-blend-overlay" />
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none premium-invert-light transition-all duration-700">
+        <img src={zodiacBg} alt="" className="w-full h-full object-cover premium-blend" />
       </div>
 
       {/* Massive Rotated Title area */}
       <div className="xl:w-1/4 flex flex-col justify-center items-start xl:items-end w-full relative z-10">
-        <p className="text-[#E5C07B] text-xs font-bold tracking-[0.4em] uppercase mb-6 xl:mb-12 xl:pr-8">
+        <p className="text-mystic-gold text-xs font-bold tracking-[0.4em] uppercase mb-6 xl:mb-12 xl:pr-8 transition-colors duration-700">
           The Cosmic Blueprint
         </p>
         <h2
           ref={titleRef}
-          className="text-[12vw] xl:text-[7vw] font-display font-bold text-white leading-[0.8] tracking-tighter uppercase xl:text-right"
+          className="text-[12vw] xl:text-[7vw] font-display font-bold text-mystic-text leading-[0.8] tracking-tighter uppercase xl:text-right transition-colors duration-700"
         >
           Zodiac <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-white italic font-light">Matrix</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-mystic-text-sec to-mystic-text italic font-light transition-colors duration-700">Matrix</span>
         </h2>
-        <p className="text-gray-500 font-light mt-8 max-w-sm xl:text-right xl:pr-2 leading-relaxed text-sm md:text-base">
+        <p className="text-mystic-text-sec font-light mt-8 max-w-sm xl:text-right xl:pr-2 leading-relaxed text-sm md:text-base transition-colors duration-700">
           Hover to attune to the celestial frequencies governing your birth.
         </p>
       </div>
 
       {/* Severe Infinite Grid */}
-      <div className="w-full xl:w-3/4 max-w-[1200px] zodiac-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-white/[0.05] border border-white/[0.05] p-px relative z-10">
+      <div className="w-full xl:w-3/4 max-w-[1200px] zodiac-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-mystic-border-subtle border border-mystic-border-subtle p-px relative z-10 transition-colors duration-700">
         {zodiacSigns.map((sign, index) => (
           <div
             key={index}
             ref={el => gridCardsRef.current[index] = el}
-            className="magnetic group relative aspect-square bg-[#050505] overflow-hidden flex flex-col items-center justify-center cursor-none transition-colors duration-700 hover:bg-[#E5C07B]"
+            className="magnetic group relative aspect-square bg-mystic-bg-sec overflow-hidden flex flex-col items-center justify-center cursor-none transition-colors duration-700 hover:bg-mystic-gold"
           >
             {/* Default State */}
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-500 group-hover:opacity-0 group-hover:scale-90 group-hover:-translate-y-4">
-              <span className="text-5xl md:text-7xl mb-4 text-white opacity-40 group-hover:opacity-100 transition-opacity">
+              <span className="text-5xl md:text-7xl mb-4 text-mystic-text opacity-40 group-hover:opacity-100 transition-opacity">
                 {sign.symbol}
               </span>
-              <h3 className="text-lg md:text-2xl font-display font-light text-white tracking-widest uppercase">
+              <h3 className="text-lg md:text-2xl font-display font-light text-mystic-text tracking-widest uppercase transition-colors duration-700">
                 {sign.name}
               </h3>
             </div>
 
             {/* Hover Reveal State - Dark Text on Gold background */}
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 opacity-0 translate-y-8 scale-110 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100">
-              <span className="text-6xl md:text-8xl mb-2 text-black opacity-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <span className="text-6xl md:text-8xl mb-2 text-mystic-bg opacity-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                 {sign.symbol}
               </span>
-              <h3 className="text-xl md:text-3xl font-display font-bold text-black tracking-widest uppercase mb-4 relative z-10">
+              <h3 className="text-xl md:text-3xl font-display font-bold text-mystic-bg tracking-widest uppercase mb-4 relative z-10">
                 {sign.name}
               </h3>
 
               <div className="flex flex-col items-center gap-2 relative z-10">
-                <span className="text-black/80 text-xs font-bold tracking-widest uppercase border-b border-black/20 pb-1">
+                <span className="text-mystic-bg/80 text-xs font-bold tracking-widest uppercase border-b border-mystic-bg/20 pb-1">
                   {sign.dates}
                 </span>
                 <div className="flex gap-4 mt-2">
-                  <span className="text-black/70 text-[10px] tracking-[0.2em] uppercase">
+                  <span className="text-mystic-bg/70 text-[10px] tracking-[0.2em] uppercase">
                     El: {sign.element}
                   </span>
-                  <span className="text-black/70 text-[10px] tracking-[0.2em] uppercase">
+                  <span className="text-mystic-bg/70 text-[10px] tracking-[0.2em] uppercase">
                     Pl: {sign.planet}
                   </span>
                 </div>
               </div>
 
               {/* Animated Underline */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-black group-hover:w-12 transition-all duration-700 delay-200" />
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-mystic-bg group-hover:w-12 transition-all duration-700 delay-200" />
             </div>
           </div>
         ))}

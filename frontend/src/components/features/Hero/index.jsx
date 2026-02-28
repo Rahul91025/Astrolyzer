@@ -226,10 +226,10 @@ const AstroHero = () => {
   return (
     <div
       ref={container}
-      className="relative min-h-screen w-full bg-[#050505] overflow-hidden flex flex-col items-center justify-center pt-32 pb-20"
+      className="relative min-h-screen w-full bg-mystic-bg overflow-hidden flex flex-col items-center justify-center pt-32 pb-20 transition-colors duration-700"
     >
       {/* Premium Cinematic Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden premium-invert-light transition-all duration-700">
         <motion.img
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.6 }}
@@ -238,18 +238,18 @@ const AstroHero = () => {
           alt="Cosmic Background"
           className="w-full h-full object-cover filter brightness-[0.7] contrast-[1.1]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-mystic-bg via-transparent to-mystic-bg transition-colors duration-700" />
       </div>
 
       {/* Subtle Abstract Orbs for depth */}
       <div
         ref={orb1Ref}
-        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-900 rounded-full mix-blend-screen opacity-30 z-0 pointer-events-none"
+        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-900 rounded-full premium-blend opacity-30 z-0 pointer-events-none transition-all duration-700"
         style={{ filter: 'blur(80px)', willChange: 'transform' }}
       />
       <div
         ref={orb2Ref}
-        className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-[#E5C07B] rounded-full mix-blend-screen opacity-15 z-0 pointer-events-none"
+        className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-mystic-gold rounded-full premium-blend opacity-15 z-0 pointer-events-none transition-all duration-700"
         style={{ filter: 'blur(100px)', willChange: 'transform' }}
       />
 
@@ -264,90 +264,135 @@ const AstroHero = () => {
         {/* Extreme Typography Title */}
         <h1
           ref={titleRef}
-          className="text-[12vw] md:text-[8vw] lg:text-[7vw] font-display font-bold text-white mb-6 leading-[0.85] tracking-tighter uppercase"
+          className="text-[12vw] md:text-[8vw] lg:text-[7vw] font-display font-bold text-mystic-text mb-6 leading-[0.85] tracking-tighter uppercase transition-colors duration-700"
           style={{ perspective: "1000px" }}
         >
-          Divine <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E5C07B] to-white italic font-light ml-12 md:ml-32">Intervention</span>
+          Divine <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-mystic-gold to-mystic-text italic font-light ml-12 md:ml-32 transition-colors duration-700">Intervention</span>
         </h1>
 
         <p
           ref={textRef}
-          className="text-lg md:text-2xl text-gray-400 font-light max-w-3xl mb-16 leading-relaxed"
+          className="text-lg md:text-2xl text-mystic-text-sec font-light max-w-3xl mb-16 leading-relaxed transition-colors duration-700"
         >
           Tap the mic and ask your astrology question. The voice agent will answer aloud.
         </p>
 
         {/* Ultra Premium Action Area */}
-        <div className="ui-reveal w-full max-w-3xl relative z-20">
-          <div className="p-[1px] rounded-full bg-gradient-to-r from-white/10 via-[#E5C07B]/40 to-white/10 hover:via-[#E5C07B] transition-all duration-1000">
-            <div className="bg-[#050505] rounded-full p-2 pr-6 flex items-center justify-between w-full h-[80px] md:h-[100px] relative overflow-hidden group">
+        <div className="ui-reveal w-full max-w-4xl relative z-20 mt-8">
+          {/* Ambient Glow Behind the whole container */}
+          <div className={`absolute left-1/2 -top-1/2 -translate-x-1/2 w-[80%] h-[200%] blur-[120px] rounded-full mix-blend-screen opacity-30 pointer-events-none transition-all duration-1000 ${isListening ? 'bg-mystic-gold/60 scale-110' : 'bg-purple-900/40'}`} />
 
-              <div className="flex items-center gap-6 h-full flex-grow pl-4">
-                <button
-                  onClick={toggleVoiceRecognition}
-                  className={`magnetic relative flex-shrink-0 w-[64px] h-[64px] md:w-[80px] md:h-[80px] rounded-full flex items-center justify-center transition-all duration-500 overflow-hidden ${isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-white hover:bg-[#E5C07B]'
-                    }`}
-                >
-                  {isListening ? (
-                    <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 1 }}>
-                      <FaStop className="text-2xl text-white" />
-                    </motion.div>
-                  ) : (
-                    <FaMicrophone className="text-2xl text-black" />
-                  )}
-                </button>
+          <div className="glass-card w-full rounded-full p-3 pl-4 pr-8 flex items-center gap-6 md:gap-10 relative overflow-hidden group border border-mystic-border-subtle bg-mystic-bg-sec/50 backdrop-blur-2xl">
 
-                <div className="flex flex-col items-start justify-center h-full pr-4">
-                  <AnimatePresence mode="wait">
-                    {isListening && (
-                      <motion.p key="listen" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-[#E5C07B] md:text-lg font-light tracking-wide">
-                        Listening...
-                      </motion.p>
-                    )}
-                    {isProcessing && (
-                      <motion.p key="proc" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-white md:text-lg font-light flex items-center gap-3">
-                        <span className="w-5 h-5 rounded-full border border-t-2 border-white border-t-[#E5C07B] animate-spin" />
-                        Preparing voice response...
-                      </motion.p>
-                    )}
-                    {!isListening && !isProcessing && !transcript && (
-                      <motion.p key="init" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-gray-500 md:text-lg font-light tracking-wide">
-                        Activate microphone to begin
-                      </motion.p>
-                    )}
-                    {error && (
-                      <motion.p key="err" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 md:text-lg font-light tracking-wide">
-                        {error}
-                      </motion.p>
-                    )}
-                    {transcript && !isProcessing && !isListening && !error && (
-                      <motion.p key="trans" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-white md:text-lg font-light italic truncate max-w-[200px] md:max-w-[400px]">
-                        Voice captured. Reply is spoken aloud.
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
+            {/* The Microphone Button Container */}
+            <div className="relative flex-shrink-0">
+              {/* Pulsing rings when listening */}
+              <AnimatePresence>
+                {isListening && (
+                  <>
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1.8, opacity: 0 }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                      className="absolute inset-0 rounded-full border border-mystic-gold pointer-events-none"
+                    />
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 2.5, opacity: 0 }}
+                      transition={{ duration: 2.5, delay: 0.5, repeat: Infinity, ease: "easeOut" }}
+                      className="absolute inset-0 rounded-full border border-mystic-gold/50 pointer-events-none"
+                    />
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 3.2, opacity: 0 }}
+                      transition={{ duration: 3, delay: 1, repeat: Infinity, ease: "easeOut" }}
+                      className="absolute inset-0 rounded-full border border-mystic-gold/20 pointer-events-none"
+                    />
+                  </>
+                )}
+              </AnimatePresence>
 
-              {/* Ambient glow inside bar */}
-              <div className="absolute top-1/2 right-0 -translate-y-1/2 w-32 h-32 bg-[#E5C07B]/10 rounded-full blur-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              <button
+                onClick={toggleVoiceRecognition}
+                className={`magnetic relative w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-full flex items-center justify-center transition-all duration-700 overflow-hidden shadow-2xl z-10 ${isListening ? 'bg-mystic-bg shadow-[0_0_40px_rgba(229,192,123,0.4)] border border-mystic-gold' : 'bg-gradient-to-br from-mystic-text to-mystic-text-sec hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]'
+                  }`}
+              >
+                {/* Button inner highlight */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent pointer-events-none mix-blend-overlay" />
+
+                {isListening ? (
+                  <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}>
+                    <FaStop className="text-3xl text-mystic-gold" />
+                  </motion.div>
+                ) : (
+                  <FaMicrophone className="text-3xl text-mystic-bg drop-shadow-md" />
+                )}
+              </button>
             </div>
+
+            {/* Text and Status Area */}
+            <div className="flex flex-col items-start justify-center flex-grow h-full py-2 overflow-hidden">
+              <AnimatePresence mode="wait">
+                {isListening ? (
+                  <motion.div key="listen" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="w-full">
+                    <p className="text-[#E5C07B] text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-2">Listening to your aura...</p>
+                    <p className="text-mystic-text font-display text-xl md:text-3xl font-light italic truncate w-full opacity-80">
+                      " {transcript || "Waiting for your question..."} "
+                    </p>
+                  </motion.div>
+                ) : isProcessing ? (
+                  <motion.div key="proc" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="flex flex-col gap-2">
+                    <p className="text-mystic-text-sec text-xs md:text-sm font-bold tracking-[0.3em] uppercase flex items-center gap-3">
+                      <span className="w-4 h-4 rounded-full border border-t-2 border-mystic-border-subtle border-t-[#E5C07B] animate-spin" />
+                      Consulting the Stars...
+                    </p>
+                    <div className="flex gap-1 items-center mt-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-mystic-gold/50 animate-[ping_1.5s_0s_infinite]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-mystic-gold/50 animate-[ping_1.5s_0.2s_infinite]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-mystic-gold/50 animate-[ping_1.5s_0.4s_infinite]" />
+                    </div>
+                  </motion.div>
+                ) : error ? (
+                  <motion.div key="err" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
+                    <p className="text-red-400 text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1">Interference Detected</p>
+                    <p className="text-mystic-text-sec font-light">{error}</p>
+                  </motion.div>
+                ) : (
+                  <motion.div key="init" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
+                    <p className="text-mystic-text text-xl md:text-3xl font-display font-light mb-1">Awaken the oracle.</p>
+                    <p className="text-mystic-text-sec text-sm md:text-base font-light font-sans tracking-wide">Press the microphone and speak your query.</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Ambient inner glow */}
+            <div className={`absolute top-1/2 right-10 -translate-y-1/2 w-40 h-40 rounded-full blur-[40px] opacity-10 pointer-events-none transition-all duration-1000 ${isListening ? 'bg-mystic-gold opacity-20' : 'bg-transparent'}`} />
           </div>
 
           {/* Master AI Response Display */}
           <AnimatePresence>
-            {aiResponse && (
+            {aiResponse && !isListening && !isProcessing && (
               <motion.div
                 initial={{ opacity: 0, y: 40, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="mt-12 w-full text-center relative"
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                className="mt-16 w-full text-center relative px-4"
               >
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-12 bg-gradient-to-b from-[#E5C07B] to-transparent -translate-y-full opacity-50" />
-                <p className="text-white text-2xl md:text-4xl lg:text-5xl font-display font-light leading-[1.2] italic max-w-4xl mx-auto drop-shadow-2xl">
-                  Voice response delivered
-                </p>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-16 bg-gradient-to-b from-[#E5C07B] to-transparent -translate-y-full opacity-60" />
+                <motion.div
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }}
+                  className="absolute left-1/2 top-[-60px] -translate-x-1/2 w-3 h-3 bg-[#E5C07B] rounded-full shadow-[0_0_15px_#E5C07B]"
+                />
+
+                <div className="relative inline-block">
+                  <span className="absolute -left-6 -top-4 text-[#E5C07B] text-4xl font-display opacity-40">"</span>
+                  <p className="text-mystic-text text-xl md:text-3xl lg:text-4xl font-display font-light leading-[1.4] italic max-w-4xl mx-auto drop-shadow-lg transition-colors duration-700">
+                    Voice response delivered.
+                  </p>
+                  <span className="absolute -right-6 -bottom-6 text-[#E5C07B] text-4xl font-display opacity-40">"</span>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

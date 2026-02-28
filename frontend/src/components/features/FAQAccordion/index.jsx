@@ -53,26 +53,25 @@ const FAQAccordion = () => {
         return (
           <div
             key={index}
-            className="border border-gray-200 rounded-md overflow-hidden transition-all duration-300"
+            className="border border-mystic-border-subtle rounded-md overflow-hidden transition-colors duration-700"
           >
             {/* Question */}
             <button
               onClick={() => toggleIndex(index)}
-              className={`w-full flex justify-between items-center text-left px-6 py-4 text-lg font-medium transition-colors duration-300 ${
-                isOpen ? 'text-orange-500' : 'text-gray-800'
-              }`}
+              className={`w-full flex justify-between items-center text-left px-6 py-4 text-lg font-medium transition-colors duration-300 ${isOpen ? 'text-mystic-gold' : 'text-mystic-text'
+                }`}
             >
               {item.question}
               {isOpen ? (
-                <ChevronUp className="text-orange-500" />
+                <ChevronUp className="text-mystic-gold transition-colors duration-300" />
               ) : (
-                <ChevronDown className="text-orange-500" />
+                <ChevronDown className="text-mystic-gold transition-colors duration-300" />
               )}
             </button>
 
             {/* Answer */}
             {isOpen && (
-              <div className="border-t border-gray-200 bg-white px-6 py-4 text-gray-600 text-sm leading-relaxed">
+              <div className="border-t border-mystic-border-subtle bg-mystic-bg-sec px-6 py-4 text-mystic-text-sec text-sm leading-relaxed transition-colors duration-700">
                 {item.answer}
               </div>
             )}

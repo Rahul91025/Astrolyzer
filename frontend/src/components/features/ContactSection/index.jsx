@@ -25,10 +25,10 @@ const CONTACT_INFO = [
 const SERVICES = ['Vedic Astrology', 'Palm Reading', 'Vastu Shastra', 'Relationship Guidance', 'Career Forecast', 'Birth Chart Analysis'];
 
 const INPUT_CLASS = `
-  w-full bg-transparent border-0 border-b border-white/10
-  text-white text-base font-light placeholder:text-gray-600
-  py-4 focus:outline-none focus:border-[#E5C07B]
-  transition-colors duration-500 caret-[#E5C07B]
+  w-full bg-transparent border-0 border-b border-mystic-border-subtle
+  text-mystic-text text-base font-light placeholder:text-mystic-text-sec/50
+  py-4 focus:outline-none focus:border-mystic-gold
+  transition-colors duration-700 caret-mystic-gold
 `;
 
 const ContactSection = () => {
@@ -64,17 +64,17 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="bg-[#050505] min-h-screen relative overflow-hidden">
+    <section className="bg-mystic-bg min-h-screen relative overflow-hidden transition-colors duration-700">
 
       {/* Massive Background Typography */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.025] select-none">
-        <span className="absolute bottom-0 left-0 text-[22vw] font-display font-black text-white uppercase leading-none tracking-tighter">
+        <span className="absolute bottom-0 left-0 text-[22vw] font-display font-black text-mystic-text uppercase leading-none tracking-tighter transition-colors duration-700">
           CONTACT
         </span>
       </div>
 
-      <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-purple-900 rounded-full blur-[200px] opacity-10 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-[#E5C07B] rounded-full blur-[200px] opacity-5 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-mystic-accent rounded-full blur-[200px] opacity-10 pointer-events-none transition-colors duration-700" />
+      <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-mystic-gold rounded-full blur-[200px] opacity-5 pointer-events-none transition-colors duration-700" />
 
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 py-32 grid grid-cols-1 xl:grid-cols-5 gap-16 md:gap-24 relative z-10 min-h-screen items-center">
 
@@ -82,14 +82,14 @@ const ContactSection = () => {
         <div className="xl:col-span-2 flex flex-col justify-center gap-16">
 
           <div>
-            <p className="text-[#E5C07B] text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Transmit to the Cosmos</p>
-            <h2 className="text-6xl md:text-7xl xl:text-8xl font-display font-bold text-white leading-[0.85] tracking-tighter uppercase">
+            <p className="text-mystic-gold text-[10px] font-bold tracking-[0.4em] uppercase mb-6 transition-colors duration-700">Transmit to the Cosmos</p>
+            <h2 className="text-6xl md:text-7xl xl:text-8xl font-display font-bold text-mystic-text leading-[0.85] tracking-tighter uppercase transition-colors duration-700">
               Let's <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-600 to-white italic font-light">
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-mystic-text-sec to-mystic-text italic font-light transition-colors duration-700">
                 Connect
               </span>
             </h2>
-            <p className="text-gray-500 font-light mt-8 max-w-sm leading-relaxed">
+            <p className="text-mystic-text-sec font-light mt-8 max-w-sm leading-relaxed transition-colors duration-700">
               Whether you seek cosmic clarity or have a specific inquiry, our astrologers are ready to guide your path.
             </p>
           </div>
@@ -99,17 +99,17 @@ const ContactSection = () => {
             {CONTACT_INFO.map((info, i) => (
               <div
                 key={i}
-                className="group flex items-start gap-6 py-6 border-b border-white/[0.05] hover:bg-white/[0.02] transition-colors duration-500 px-2 -mx-2"
+                className="group flex items-start gap-6 py-6 border-b border-mystic-border-subtle hover:bg-mystic-text/5 transition-colors duration-500 px-2 -mx-2"
               >
-                <span className="text-[#E5C07B] text-xl mt-1 flex-shrink-0 group-hover:scale-125 transition-transform duration-500">
+                <span className="text-mystic-gold text-xl mt-1 flex-shrink-0 group-hover:scale-125 transition-all duration-500">
                   {info.icon}
                 </span>
                 <div>
-                  <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gray-600 mb-2">{info.label}</p>
+                  <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-mystic-text-sec mb-2 transition-colors duration-700">{info.label}</p>
                   {info.lines.map((line, j) => (
-                    <p key={j} className="text-white font-light text-base">{line}</p>
+                    <p key={j} className="text-mystic-text font-light text-base transition-colors duration-700">{line}</p>
                   ))}
-                  <p className="text-gray-600 text-xs mt-1">{info.subtitle}</p>
+                  <p className="text-mystic-text-sec text-xs mt-1 transition-colors duration-700">{info.subtitle}</p>
                 </div>
               </div>
             ))}
@@ -117,10 +117,10 @@ const ContactSection = () => {
 
           {/* Social */}
           <div>
-            <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gray-600 mb-4">Also Find Us</p>
+            <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-mystic-text-sec mb-4 transition-colors duration-700">Also Find Us</p>
             <div className="flex gap-6">
               {['Instagram', 'Twitter', 'YouTube'].map(s => (
-                <button key={s} className="magnetic text-xs font-bold tracking-widest uppercase text-gray-500 hover:text-[#E5C07B] transition-colors duration-300">
+                <button key={s} className="magnetic text-xs font-bold tracking-widest uppercase text-mystic-text-sec hover:text-mystic-gold transition-colors duration-300">
                   {s}
                 </button>
               ))}
@@ -141,16 +141,16 @@ const ContactSection = () => {
                 transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
                 className="absolute inset-0 flex flex-col items-center justify-center text-center py-32"
               >
-                <div className="w-24 h-24 rounded-full border border-[#E5C07B]/50 flex items-center justify-center mb-8">
-                  <span className="text-[#E5C07B] text-4xl">✦</span>
+                <div className="w-24 h-24 rounded-full border border-mystic-gold/50 flex items-center justify-center mb-8 transition-colors duration-700">
+                  <span className="text-mystic-gold text-4xl transition-colors duration-700">✦</span>
                 </div>
-                <h3 className="text-5xl font-display font-light text-white mb-4 uppercase tracking-wider">Transmitted</h3>
-                <p className="text-gray-500 font-light max-w-md leading-relaxed">
+                <h3 className="text-5xl font-display font-light text-mystic-text mb-4 uppercase tracking-wider transition-colors duration-700">Transmitted</h3>
+                <p className="text-mystic-text-sec font-light max-w-md leading-relaxed transition-colors duration-700">
                   The stars have received your message. An astrologer will respond within 24 hours.
                 </p>
                 <button
                   onClick={() => { setStatus('idle'); setFormData({ name: '', email: '', service: '', message: '' }); }}
-                  className="magnetic mt-12 flex items-center gap-4 text-xs font-bold tracking-[0.2em] uppercase text-white hover:text-[#E5C07B] transition-colors duration-300"
+                  className="magnetic mt-12 flex items-center gap-4 text-xs font-bold tracking-[0.2em] uppercase text-mystic-text hover:text-mystic-gold transition-colors duration-300"
                 >
                   Send Another
                   <div className="w-8 h-[1px] bg-current group-hover:w-16 transition-all duration-500" />
@@ -168,13 +168,13 @@ const ContactSection = () => {
                 transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
                 className="flex flex-col gap-0"
               >
-                <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-600 mb-12">Initiate Contact</p>
+                <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-mystic-text-sec mb-12 transition-colors duration-700">Initiate Contact</p>
 
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-10">
                   {/* Name */}
                   <div className="relative mb-8 md:mb-0">
-                    <label className={`absolute top-4 left-0 transition-all duration-500 pointer-events-none text-xs font-bold tracking-[0.25em] uppercase ${focusField === 'name' || formData.name ? 'top-0 text-[8px] text-[#E5C07B]' : 'text-gray-500'}`}>
+                    <label className={`absolute top-4 left-0 transition-all duration-500 pointer-events-none text-xs font-bold tracking-[0.25em] uppercase ${focusField === 'name' || formData.name ? 'top-0 text-[8px] text-mystic-gold' : 'text-mystic-text-sec'}`}>
                       Full Name
                     </label>
                     <input
@@ -190,7 +190,7 @@ const ContactSection = () => {
 
                   {/* Email */}
                   <div className="relative mb-8 md:mb-0">
-                    <label className={`absolute top-4 left-0 transition-all duration-500 pointer-events-none text-xs font-bold tracking-[0.25em] uppercase ${focusField === 'email' || formData.email ? 'top-0 text-[8px] text-[#E5C07B]' : 'text-gray-500'}`}>
+                    <label className={`absolute top-4 left-0 transition-all duration-500 pointer-events-none text-xs font-bold tracking-[0.25em] uppercase ${focusField === 'email' || formData.email ? 'top-0 text-[8px] text-mystic-gold' : 'text-mystic-text-sec'}`}>
                       Email Address
                     </label>
                     <input
@@ -207,16 +207,16 @@ const ContactSection = () => {
 
                 {/* Service Selector */}
                 <div className="mt-10 mb-4">
-                  <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gray-500 mb-4">Service Sought</p>
+                  <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-mystic-text-sec mb-4 transition-colors duration-700">Service Sought</p>
                   <div className="flex flex-wrap gap-2">
                     {SERVICES.map(svc => (
                       <button
                         type="button"
                         key={svc}
                         onClick={() => handleChange('service', svc === formData.service ? '' : svc)}
-                        className={`magnetic px-4 py-2 text-[10px] font-bold tracking-[0.15em] uppercase border transition-all duration-300 ${formData.service === svc
-                            ? 'border-[#E5C07B] bg-[#E5C07B] text-black'
-                            : 'border-white/10 text-gray-500 hover:border-white/30 hover:text-white'
+                        className={`magnetic px-4 py-2 text-[10px] font-bold tracking-[0.15em] uppercase border transition-all duration-700 ${formData.service === svc
+                          ? 'border-mystic-gold bg-mystic-gold text-mystic-bg'
+                          : 'border-mystic-border-subtle text-mystic-text-sec hover:border-mystic-border hover:text-mystic-text'
                           }`}
                       >
                         {svc}
@@ -227,7 +227,7 @@ const ContactSection = () => {
 
                 {/* Message */}
                 <div className="relative mt-10">
-                  <label className={`absolute top-4 left-0 transition-all duration-500 pointer-events-none text-xs font-bold tracking-[0.25em] uppercase ${focusField === 'message' || formData.message ? 'top-0 text-[8px] text-[#E5C07B]' : 'text-gray-500'}`}>
+                  <label className={`absolute top-4 left-0 transition-all duration-500 pointer-events-none text-xs font-bold tracking-[0.25em] uppercase ${focusField === 'message' || formData.message ? 'top-0 text-[8px] text-mystic-gold' : 'text-mystic-text-sec'}`}>
                     Your Message
                   </label>
                   <textarea
@@ -246,24 +246,24 @@ const ContactSection = () => {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="magnetic group relative overflow-hidden flex items-center gap-6 text-white"
+                    className="magnetic group relative overflow-hidden flex items-center gap-6 text-mystic-text"
                   >
                     {/* Animated circle submit button */}
-                    <div className={`relative w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-700 ${status === 'sending' ? 'border-[#E5C07B]' : 'border-white/30 group-hover:border-[#E5C07B] group-hover:bg-[#E5C07B]'}`}>
+                    <div className={`relative w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-700 ${status === 'sending' ? 'border-mystic-gold' : 'border-mystic-border group-hover:border-mystic-gold group-hover:bg-mystic-gold'}`}>
                       {status === 'sending' ? (
-                        <div className="w-5 h-5 border-2 border-[#E5C07B] border-t-transparent rounded-full animate-spin" />
+                        <div className="w-5 h-5 border-2 border-mystic-gold border-t-transparent rounded-full animate-spin transition-colors duration-700" />
                       ) : (
-                        <svg className="w-6 h-6 transition-colors duration-500 group-hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6 transition-colors duration-500 group-hover:text-mystic-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                       )}
                     </div>
-                    <span className="text-sm font-bold tracking-[0.2em] uppercase group-hover:text-[#E5C07B] transition-colors duration-300">
+                    <span className="text-sm font-bold tracking-[0.2em] uppercase group-hover:text-mystic-gold transition-colors duration-300">
                       {status === 'sending' ? 'Transmitting...' : 'Send Message'}
                     </span>
                   </button>
 
-                  <p className="text-gray-700 text-xs font-light tracking-wider hidden md:block">
+                  <p className="text-mystic-text-sec text-xs font-light tracking-wider hidden md:block transition-colors duration-700">
                     By submitting, you agree to our<br />privacy & cosmic terms.
                   </p>
                 </div>
@@ -275,7 +275,7 @@ const ContactSection = () => {
       </div>
 
       {/* Bottom Divider */}
-      <div className="relative z-10 w-full border-t border-white/[0.05]" />
+      <div className="relative z-10 w-full border-t border-mystic-border-subtle transition-colors duration-700" />
     </section>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import AstroHero from '../../components/Hero';
+import DailyHoroscope from '../../components/DailyHoroscope';
 import DailyRoutines from '../../components/DailyRoutines';
 import AstrologyPage from '../../components/Learn';
 import PricingSection from '../../components/Pricing';
@@ -10,6 +11,7 @@ const Home = () => {
   return (
     <main>
       <AstroHero />
+      <DailyHoroscope />
       <DailyRoutines />
       <AstrologyPage />
       <PricingSection />

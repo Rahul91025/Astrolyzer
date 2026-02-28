@@ -2,26 +2,18 @@ const nodemailer = require('nodemailer');
 
 const RECEIVER_EMAIL = 'rahulgupta109037@gmail.com';
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
-});
+class EmailService {
+    constructor() {
+        this.transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+    }
 
-const bookAppointment = async (req, res) => {
-    try {
-        const {
-            name, email, phone, gender,
-            birthDate, birthTime, birthPlace,
-            service, preferredTime, channel, notes
-        } = req.body;
-
-        if (!name || !email || !phone) {
-            return res.status(400).json({ error: 'Name, email, and phone are required.' });
-        }
-
+    async sendAppointmentEmail({ name, email, phone, gender, birthDate, birthTime, birthPlace, service, preferredTime, channel, notes }) {
         const htmlEmail = `
 <!DOCTYPE html>
 <html>
@@ -108,20 +100,8 @@ const bookAppointment = async (req, res) => {
             replyTo: email,
         };
 
-        await transporter.sendMail(mailOptions);
-
-        res.status(200).json({
-            success: true,
-            message: 'Appointment booked successfully! A confirmation has been sent.'
-        });
-
-    } catch (error) {
-        console.error('Email sending error:', error);
-        res.status(500).json({
-            error: 'Failed to send appointment email.',
-            details: error.message
-        });
+        return await this.transporter.sendMail(mailOptions);
     }
-};
+}
 
-module.exports = { bookAppointment };
+module.exports = new EmailService();

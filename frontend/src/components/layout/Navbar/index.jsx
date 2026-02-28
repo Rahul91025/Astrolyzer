@@ -53,14 +53,50 @@ const Navbar = () => {
       <header className={`fixed top-0 w-full z-50 transition-all duration-700 ${scrolled ? 'bg-[#050505]/80 backdrop-blur-xl border-b border-white/[0.04] py-4' : 'py-6'}`}>
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 flex justify-between items-center">
 
-          {/* Logo */}
-          <Link to="/" className="magnetic flex items-center gap-3 z-20">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#E5C07B] to-purple-500 flex items-center justify-center">
-              <div className="w-5 h-5 rounded-full bg-[#050505] flex items-center justify-center text-[#E5C07B] text-xs font-display font-black">✦</div>
+          {/* Premium Logo */}
+          <Link to="/" className="magnetic flex items-center gap-4 z-20 group perspective-[1000px]">
+            <div className="relative flex items-center justify-center w-12 h-12 transform-style-3d group-hover:rotate-x-12 group-hover:-rotate-y-12 transition-transform duration-700">
+              {/* Spinning background glow */}
+              <div className="absolute inset-0 bg-[#E5C07B] rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
+
+              {/* Geometric SVG Symbol */}
+              <svg viewBox="0 0 100 100" className="w-full h-full text-[#E5C07B] drop-shadow-[0_0_8px_rgba(229,192,123,0.5)]">
+                <defs>
+                  <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FFF2D8" />
+                    <stop offset="50%" stopColor="#E5C07B" />
+                    <stop offset="100%" stopColor="#9C7A3C" />
+                  </linearGradient>
+                </defs>
+
+                {/* Outer rotating dashed ring */}
+                <circle cx="50" cy="50" r="46" fill="none" stroke="url(#goldGrad)" strokeWidth="0.5" strokeDasharray="2 4" className="origin-center animate-[spin_20s_linear_infinite]" />
+
+                {/* Middle solid ring */}
+                <circle cx="50" cy="50" r="38" fill="none" stroke="url(#goldGrad)" strokeWidth="0.5" className="opacity-50" />
+
+                {/* Eight-pointed star base */}
+                <path d="M50 15 L53 47 L85 50 L53 53 L50 85 L47 53 L15 50 L47 47 Z" fill="url(#goldGrad)" className="opacity-90 origin-center animate-[pulse_4s_ease-in-out_infinite]" />
+                <path d="M50 15 L53 47 L85 50 L53 53 L50 85 L47 53 L15 50 L47 47 Z" fill="none" stroke="url(#goldGrad)" strokeWidth="1" className="origin-center rotate-45 opacity-40" />
+
+                {/* Inner geometric shapes */}
+                <circle cx="50" cy="50" r="18" fill="none" stroke="url(#goldGrad)" strokeWidth="1" />
+                <circle cx="50" cy="50" r="8" fill="#050505" stroke="url(#goldGrad)" strokeWidth="1" />
+
+                {/* Center Diamond */}
+                <path d="M50 45 L52 50 L50 55 L48 50 Z" fill="url(#goldGrad)" />
+              </svg>
             </div>
-            <span className="font-display text-lg font-bold tracking-[0.2em] text-white uppercase">
-              ASTROLOGER
-            </span>
+
+            {/* Logo Typography */}
+            <div className="flex flex-col pt-1">
+              <span className="font-display text-xl md:text-2xl font-black tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 uppercase leading-none group-hover:from-[#E5C07B] group-hover:to-white transition-all duration-700">
+                ASTROLOGER
+              </span>
+              <span className="text-[#E5C07B] text-[7px] font-black tracking-[0.5em] uppercase opacity-60 mt-1 pl-1">
+                Cosmic Intelligence
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav - minimal */}
